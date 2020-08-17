@@ -788,15 +788,15 @@ bool SyncJournalDb::updateMetadataTableStructure()
         commitInternal("update database structure: add e2eMangledName col");
     }
 
-	if (!columns.contains("isE2eEncrypted")) {
-		SqlQuery query(_db);
-		query.prepare("ALTER TABLE metadata ADD COLUMN isE2eEncrypted INTEGER;");
-		if (!query.exec()) {
-			sqlFail("updateMetadataTableStructure: add e2eMangledName column", query);
-			re = false;
-		}
-		commitInternal("update database structure: add e2eMangledName col");
-	}
+    if (!columns.contains("isE2eEncrypted")) {
+        SqlQuery query(_db);
+        query.prepare("ALTER TABLE metadata ADD COLUMN isE2eEncrypted INTEGER;");
+        if (!query.exec()) {
+            sqlFail("updateMetadataTableStructure: add e2eMangledName column", query);
+            re = false;
+        }
+        commitInternal("update database structure: add e2eMangledName col");
+    }
 
     if (!columns.contains("virtualfile")) {
         SqlQuery query(_db);
@@ -1388,7 +1388,6 @@ bool SyncJournalDb::setFileRecordVirtualFile(const SyncJournalFileRecord &record
     existing._virtualfile = record._virtualfile;
     return setFileRecord(existing);
 }
-
 
 static void toDownloadInfo(SqlQuery &query, SyncJournalDb::DownloadInfo *res)
 {
